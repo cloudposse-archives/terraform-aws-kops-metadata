@@ -7,18 +7,24 @@ Terraform module to lookup resources within a [Kops](https://github.com/kubernet
 
 ```hcl
 module "kops_metadata" {
-  source    = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
-  dns_zone  = "cluster.domain.com"
+  source       = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
+  dns_zone     = "cluster.domain.com"
+  bastion_name = "bastion"
+  masters_name = "masters"
+  nodes_name   = "nodes"
 }
 ```
 
 
 ## Variables
 
-|  Name           |  Default             |  Description                                                                     | Required |
-|:----------------|:---------------------|:---------------------------------------------------------------------------------|:--------:|
-| `dns_zone`      | ``                   | Name of the Kops DNS zone                                                        | Yes      |
-| `enabled`       | `true`               | Set to `false` to prevent the module from creating or accessing any resources    | No       |
+|  Name            |  Default             |  Description                                                                     | Required |
+|:-----------------|:---------------------|:---------------------------------------------------------------------------------|:--------:|
+| `dns_zone`       | ``                   | Name of the Kops DNS zone                                                        | Yes      |
+| `enabled`        | `true`               | Set to `false` to prevent the module from creating or accessing any resources    | No       |
+| `bastion_name`   | `bastion`            | Bastion server subdomain name in the Kops DNS zone                               | No       |
+| `masters_name`   | `masters`            | K8s masters subdomain name in the Kops DNS zone                                  | No       |
+| `nodes_name`     | `nodes`              | K8s nodes subdomain name in the Kops DNS zone                                    | No       |
 
 
 ## Outputs

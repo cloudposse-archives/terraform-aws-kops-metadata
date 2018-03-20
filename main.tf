@@ -28,10 +28,10 @@ data "aws_subnet_ids" "utility" {
 data "aws_security_group" "bastion" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "bastion.${var.dns_zone}"
+  name   = "${var.bastion_name}.${var.dns_zone}"
 
   tags {
-    Name              = "bastion.${var.dns_zone}"
+    Name              = "${var.bastion_name}.${var.dns_zone}"
     KubernetesCluster = "${var.dns_zone}"
   }
 }
@@ -39,10 +39,10 @@ data "aws_security_group" "bastion" {
 data "aws_security_group" "masters" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "masters.${var.dns_zone}"
+  name   = "${var.masters_name}.${var.dns_zone}"
 
   tags {
-    Name              = "masters.${var.dns_zone}"
+    Name              = "${var.masters_name}.${var.dns_zone}"
     KubernetesCluster = "${var.dns_zone}"
   }
 }
@@ -50,10 +50,10 @@ data "aws_security_group" "masters" {
 data "aws_security_group" "nodes" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "nodes.${var.dns_zone}"
+  name   = "${var.nodes_name}.${var.dns_zone}"
 
   tags {
-    Name              = "nodes.${var.dns_zone}"
+    Name              = "${var.nodes_name}.${var.dns_zone}"
     KubernetesCluster = "${var.dns_zone}"
   }
 }
