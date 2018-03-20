@@ -113,7 +113,7 @@ or [hire us][hire] to help build your next cloud platform.
 * Thanks https://github.com/sagansystems/terraform-aws-vpc-kops for inspiration
 
 
-### Contributors
+## Contributors
 
 | [![Erik Osterman][erik_img]][erik_web]<br/>[Erik Osterman][erik_web] | [![Andriy Knysh][andriy_img]][andriy_web]<br/>[Andriy Knysh][andriy_web] |
 |-------------------------------------------------------|------------------------------------------------------------------|
