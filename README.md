@@ -42,6 +42,12 @@ module "kops_metadata" {
 | `nodes_security_group_id`       | K8s nodes Security Group ID            |
 
 
+## Credits
+
+Thanks to [Gladly.com](https://www.gladly.com/) for the inspiration with this wonderful module:
+
+https://github.com/sagansystems/terraform-aws-vpc-kops
+
 
 ## Help
 
@@ -112,11 +118,6 @@ or [hire us][hire] to help build your next cloud platform.
   [website]: https://cloudposse.com/
   [community]: https://github.com/cloudposse/
   [hire]: https://cloudposse.com/contact/
-
-
-## References
-
-* Thanks https://github.com/sagansystems/terraform-aws-vpc-kops for inspiration
 
 
 ## Contributors
