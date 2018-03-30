@@ -59,3 +59,11 @@ data "aws_security_group" "nodes" {
     KubernetesCluster = "${var.dns_zone}"
   }
 }
+
+data "aws_iam_role" "masters" {
+  name = "${var.masters_name}.${var.dns_zone}"
+}
+
+data "aws_iam_role" "nodes" {
+  name = "${var.nodes_name}.${var.dns_zone}"
+}

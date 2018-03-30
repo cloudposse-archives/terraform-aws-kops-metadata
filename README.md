@@ -41,7 +41,9 @@ module "kops_metadata" {
 | `nodes_security_group_arn`      | K8s nodes Security Group ARN           |
 | `nodes_security_group_id`       | K8s nodes Security Group ID            |
 | `masters_role_name`             | Kops masters Role name                 |
+| `masters_role_arn`              | Kops masters Role ARN                  |
 | `nodes_role_name`               | Kops nodes Role name                   |
+| `nodes_role_arn`                | Kops nodes Role ARN                    |
 
 
 ## Credits

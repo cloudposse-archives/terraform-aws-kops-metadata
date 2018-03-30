@@ -26,6 +26,14 @@ output "masters_security_group_id" {
   value = "${join("", data.aws_security_group.masters.*.id)}"
 }
 
+output "masters_role_name" {
+  value = "${data.aws_iam_role.masters.id}"
+}
+
+output "masters_role_arn" {
+  value = "${data.aws_iam_role.masters.arn}"
+}
+
 output "nodes_security_group_arn" {
   value = "${join("", data.aws_security_group.nodes.*.arn)}"
 }
@@ -34,10 +42,10 @@ output "nodes_security_group_id" {
   value = "${join("", data.aws_security_group.nodes.*.id)}"
 }
 
-output "masters_role_name" {
-  value = "arn:aws:iam::${data.aws_caller_identity.default.account_id}:role/${var.masters_name}.${var.dns_zone}"
+output "nodes_role_name" {
+  value = "${data.aws_iam_role.nodes.id}"
 }
 
-output "nodes_role_name" {
-  value = "arn:aws:iam::${data.aws_caller_identity.default.account_id}:role/${var.nodes_name}.${var.dns_zone}"
+output "nodes_role_arn" {
+  value = "${data.aws_iam_role.nodes.arn}"
 }
