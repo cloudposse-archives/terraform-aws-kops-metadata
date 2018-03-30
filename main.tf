@@ -1,3 +1,5 @@
+data "aws_caller_identity" "default" {}
+
 data "aws_vpc" "kops" {
   count = "${var.enabled == "true" ? 1 : 0}"
 
@@ -56,4 +58,12 @@ data "aws_security_group" "nodes" {
     Name              = "${var.nodes_name}.${var.dns_zone}"
     KubernetesCluster = "${var.dns_zone}"
   }
+}
+
+data "aws_iam_role" "masters" {
+  name = "${var.masters_name}.${var.dns_zone}"
+}
+
+data "aws_iam_role" "nodes" {
+  name = "${var.nodes_name}.${var.dns_zone}"
 }
