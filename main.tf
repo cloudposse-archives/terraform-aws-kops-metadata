@@ -1,3 +1,5 @@
+data "aws_caller_identity" "default" {}
+
 data "aws_vpc" "kops" {
   count = "${var.enabled == "true" ? 1 : 0}"
 

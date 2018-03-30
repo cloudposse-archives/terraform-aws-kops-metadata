@@ -33,3 +33,11 @@ output "nodes_security_group_arn" {
 output "nodes_security_group_id" {
   value = "${join("", data.aws_security_group.nodes.*.id)}"
 }
+
+output "masters_role_name" {
+  value = "arn:aws:iam::${data.aws_caller_identity.default.account_id}:role/${var.masters_name}.${var.dns_zone}"
+}
+
+output "nodes_role_name" {
+  value = "arn:aws:iam::${data.aws_caller_identity.default.account_id}:role/${var.nodes_name}.${var.dns_zone}"
+}
