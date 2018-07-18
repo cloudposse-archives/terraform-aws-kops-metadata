@@ -6,3 +6,6 @@
 .terraform/
 .idea
 terraform-aws-kops-metadata.iml
+
+.build-harness
+build-harness
