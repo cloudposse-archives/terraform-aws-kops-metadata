@@ -4,8 +4,8 @@ data "aws_vpc" "kops" {
   count = "${var.enabled == "true" ? 1 : 0}"
 
   filter {
-    name   = "tag:Name"
-    values = ["${var.dns_zone}"]
+    name   = "tag:${var.vpc_tag}"
+    values = ["${concat(var.vpc_tag_values, list(var.dns_zone))}"]
   }
 }
 
