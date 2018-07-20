@@ -25,3 +25,13 @@ variable "nodes_name" {
   default     = "nodes"
   description = "K8s nodes subdomain name in the Kops DNS zone"
 }
+
+variable "vpc_tag" {
+  default     = "Name"
+  description = "Tag used to lookup the Kops VPC"
+}
+
+variable "vpc_tag_values" {
+  default     = []
+  description = "Tag values list to lookup the Kops VPC"
+}
