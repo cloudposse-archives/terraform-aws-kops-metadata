@@ -68,17 +68,14 @@ related:
 
 # Short description of this project
 description: |-
-  Terraform module to lookup resources within a [Kops](https://github.com/kubernetes/kops) cluster
+  Terraform module to lookup IAM roles within a [Kops](https://github.com/kubernetes/kops) cluster
 
 # How to use this project
 usage: |-
   ```hcl
   module "kops_metadata" {
-    source       = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
+    source       = "git::https://github.com/cloudposse/terraform-aws-kops-data-iam.git?ref=master"
     dns_zone     = "cluster.domain.com"
-    bastion_name = "bastion"
-    masters_name = "masters"
-    nodes_name   = "nodes"
   }
   ```
 

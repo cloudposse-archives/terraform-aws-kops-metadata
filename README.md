@@ -6,7 +6,7 @@
 # terraform-aws-kops-metadata [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-kops-metadata.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-kops-metadata) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-kops-metadata.svg)](https://github.com/cloudposse/terraform-aws-kops-metadata/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
-Terraform module to lookup resources within a [Kops](https://github.com/kubernetes/kops) cluster
+Terraform module to lookup IAM roles within a [Kops](https://github.com/kubernetes/kops) cluster
 
 
 ---
@@ -44,11 +44,8 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 ```hcl
 module "kops_metadata" {
-  source       = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
+  source       = "git::https://github.com/cloudposse/terraform-aws-kops-data-iam.git?ref=master"
   dns_zone     = "cluster.domain.com"
-  bastion_name = "bastion"
-  masters_name = "masters"
-  nodes_name   = "nodes"
 }
 ```
 
@@ -67,36 +64,21 @@ Available targets:
   lint                                Lint terraform code
 
 ```
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bastion_name | Bastion server subdomain name in the Kops DNS zone | string | `bastion` | no |
-| dns_zone | Name of the Kops DNS zone | string | - | yes |
+| cluster_name | The kuberetes cluster name | string | - | yes |
 | enabled | Set to false to prevent the module from creating or accessing any resources | string | `true` | no |
-| masters_name | K8s masters subdomain name in the Kops DNS zone | string | `masters` | no |
-| nodes_name | K8s nodes subdomain name in the Kops DNS zone | string | `nodes` | no |
-| vpc_tag | Tag used to lookup the Kops VPC | string | `Name` | no |
-| vpc_tag_values | Tag values list to lookup the Kops VPC | string | `<list>` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bastion_security_group_arn | Bastion server Security Group ARN |
-| bastion_security_group_id | Bastion server Security Group ID |
 | masters_role_arn | K8s nodes Security Group ID |
 | masters_role_name | K8s nodes Security Group ARN |
-| masters_security_group_arn | K8s masters Security Group ARN |
-| masters_security_group_id | K8s masters Security Group ID |
 | nodes_role_arn | Kops nodes Role ARN |
 | nodes_role_name | Kops nodes Role name |
-| nodes_security_group_arn | Kops masters Role name |
-| nodes_security_group_id | Kops masters Role ARN |
-| private_subnet_ids | Private subnets IDs in the VPC |
-| utility_subnet_ids | Utility submets IDs in the VPC |
-| vpc_id | Kops VPC ID |
 
 
 
@@ -184,7 +166,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2017-2018 [Cloud Posse, LLC](https://cpco.io/copyright)
+Copyright © 2017-2019 [Cloud Posse, LLC](https://cpco.io/copyright)
 
 
 
