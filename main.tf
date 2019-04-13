@@ -1,23 +1,31 @@
-data "aws_caller_identity" "default" {}
 
+
+locals {
+  vpc_id = "${var.vpc_id == "" && var.enabled == "true" ? element(concat(data.aws_vpc.kops.*.id, list(""), 0)) : var.vpc_id}"
+  cluster_tag = "kubernetes/cluster/${var.cluster_name}"
+}
+
+# kops 1.11, VPC gets KC and k/c tag if owned, nothing if shared.
 data "aws_vpc" "kops" {
   count = "${var.enabled == "true" ? 1 : 0}"
 
   filter {
-    name   = "tag:${var.vpc_tag}"
-    values = ["${concat(var.vpc_tag_values, list(var.dns_zone))}"]
+    name   = "tag-key"
+    values = ["${local.cluster_tag}"]
   }
 }
 
+# kops 1.11 private subnet gets KC and k/c tag + SubnetType = "Private". kops 1.12 drops KC tag.
 data "aws_subnet_ids" "private" {
   count  = "${var.enabled == "true" ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.kops.id}"
+  vpc_id = "${local.vpc_id}"
 
   tags {
     "kubernetes.io/role/internal-elb" = "1"
   }
 }
 
+# kops 1.11 private subnet gets KC and k/c tag + SubnetType = "Utility". kops 1.12 drops KC tag.
 data "aws_subnet_ids" "utility" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
@@ -27,43 +35,36 @@ data "aws_subnet_ids" "utility" {
   }
 }
 
+# kops 1.11 & 1.12 SG bastion gets KC and k/c tag plus Name = bastion.clustername
 data "aws_security_group" "bastion" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "${var.bastion_name}.${var.dns_zone}"
+  name   = "bastion.${var.cluster_name}"
 
   tags {
-    Name              = "${var.bastion_name}.${var.dns_zone}"
-    KubernetesCluster = "${var.dns_zone}"
+    Name              = "bastion.${var.cluster_name}"
   }
 }
 
+# kops 1.11 & 1.12 SG masters gets KC and k/c tag plus Name = masters.clustername
 data "aws_security_group" "masters" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "${var.masters_name}.${var.dns_zone}"
+  name   = "masters.${var.cluster_name}"
 
   tags {
-    Name              = "${var.masters_name}.${var.dns_zone}"
-    KubernetesCluster = "${var.dns_zone}"
+    Name              = "masters.${var.cluster_name}"
   }
 }
 
+# kops 1.11 & 1.12 SG masters gets KC and k/c tag plus Name = nodes.clustername
 data "aws_security_group" "nodes" {
   count  = "${var.enabled == "true" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.kops.id}"
-  name   = "${var.nodes_name}.${var.dns_zone}"
+  name   = "nodes.${var.cluster_name}"
 
   tags {
-    Name              = "${var.nodes_name}.${var.dns_zone}"
-    KubernetesCluster = "${var.dns_zone}"
+    Name              = "nodes.${var.cluster_name}"
   }
 }
 
-data "aws_iam_role" "masters" {
-  name = "${var.masters_name}.${var.dns_zone}"
-}
-
-data "aws_iam_role" "nodes" {
-  name = "${var.nodes_name}.${var.dns_zone}"
-}
