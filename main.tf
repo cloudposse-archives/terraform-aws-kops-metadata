@@ -1,7 +1,5 @@
-
-
 locals {
-  vpc_id = "${var.vpc_id == "" && var.enabled == "true" ? element(concat(data.aws_vpc.kops.*.id, list(""), 0)) : var.vpc_id}"
+  vpc_id      = "${var.vpc_id == "" && var.enabled == "true" ? element(concat(data.aws_vpc.kops.*.id, list(""), 0)) : var.vpc_id}"
   cluster_tag = "kubernetes/cluster/${var.cluster_name}"
 }
 
@@ -42,7 +40,7 @@ data "aws_security_group" "bastion" {
   name   = "bastion.${var.cluster_name}"
 
   tags {
-    Name              = "bastion.${var.cluster_name}"
+    Name = "bastion.${var.cluster_name}"
   }
 }
 
@@ -53,7 +51,7 @@ data "aws_security_group" "masters" {
   name   = "masters.${var.cluster_name}"
 
   tags {
-    Name              = "masters.${var.cluster_name}"
+    Name = "masters.${var.cluster_name}"
   }
 }
 
@@ -64,7 +62,6 @@ data "aws_security_group" "nodes" {
   name   = "nodes.${var.cluster_name}"
 
   tags {
-    Name              = "nodes.${var.cluster_name}"
+    Name = "nodes.${var.cluster_name}"
   }
 }
-
