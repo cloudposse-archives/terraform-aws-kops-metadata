@@ -61,9 +61,11 @@ data "aws_security_group" "nodes" {
 }
 
 data "aws_iam_role" "masters" {
-  name = "${var.masters_name}.${var.dns_zone}"
+  count = "${var.enabled == "true" ? 1 : 0}"
+  name  = "${var.masters_name}.${var.dns_zone}"
 }
 
 data "aws_iam_role" "nodes" {
-  name = "${var.nodes_name}.${var.dns_zone}"
+  count = "${var.enabled == "true" ? 1 : 0}"
+  name  = "${var.nodes_name}.${var.dns_zone}"
 }

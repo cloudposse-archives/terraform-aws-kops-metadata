@@ -42,6 +42,11 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 ## Usage
 
+
+**IMPORTANT:** The `master` branch is used in `source` just as an example. In your code, do not pin to `master` because there may be breaking changes between releases.
+Instead pin to the release tag (e.g. `?ref=tags/x.y.z`) of one of our [latest releases](https://github.com/cloudposse/terraform-aws-kops-metadata/releases).
+
+
 ```hcl
 module "kops_metadata" {
   source       = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
@@ -67,7 +72,6 @@ Available targets:
   lint                                Lint terraform code
 
 ```
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -78,7 +82,7 @@ Available targets:
 | masters_name | K8s masters subdomain name in the Kops DNS zone | string | `masters` | no |
 | nodes_name | K8s nodes subdomain name in the Kops DNS zone | string | `nodes` | no |
 | vpc_tag | Tag used to lookup the Kops VPC | string | `Name` | no |
-| vpc_tag_values | Tag values list to lookup the Kops VPC | string | `<list>` | no |
+| vpc_tag_values | Tag values list to lookup the Kops VPC | list | `<list>` | no |
 
 ## Outputs
 
@@ -184,7 +188,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2017-2018 [Cloud Posse, LLC](https://cpco.io/copyright)
+Copyright © 2017-2019 [Cloud Posse, LLC](https://cpco.io/copyright)
 
 
 
@@ -243,7 +247,7 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 |---|
 
   [aknysh_homepage]: https://github.com/aknysh
-  [aknysh_avatar]: https://github.com/aknysh.png?size=150
+  [aknysh_avatar]: https://img.cloudposse.com/150x150/https://github.com/aknysh.png
 
 
 
