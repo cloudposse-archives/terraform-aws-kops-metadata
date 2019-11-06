@@ -1,4 +1,3 @@
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -9,7 +8,7 @@
 | masters_name | K8s masters subdomain name in the Kops DNS zone | string | `masters` | no |
 | nodes_name | K8s nodes subdomain name in the Kops DNS zone | string | `nodes` | no |
 | vpc_tag | Tag used to lookup the Kops VPC | string | `Name` | no |
-| vpc_tag_values | Tag values list to lookup the Kops VPC | string | `<list>` | no |
+| vpc_tag_values | Tag values list to lookup the Kops VPC | list | `<list>` | no |
 
 ## Outputs
 
